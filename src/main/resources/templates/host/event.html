@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event/View Event</title>
+    <link rel="stylesheet" th:href="@{/css/host/event.css}">
+</head>
+<body>
+    <nav class="navbar">
+      <div class="event"><a th:href="@{/host/home}">Event Management</a></div>
+        <div class="menu">
+          <a th:href="@{/host/event/add}">Add Event</a>
+          <a th:href="@{/host/profile}"
+            ><img th:src="@{/img/R.png}" alt="" class="image1"
+          /></a>
+        </div>
+      </nav>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Event Name</th>
+              <th>Venue</th>
+              <th>Category</th>
+              <th>Status</th>
+              <th>Guest Capacity</th>
+              <th>Ticket Price</th>
+              <th>Description</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>Conference</td>
+              <td>Hotel Tulip</td>
+              <td>jkjkjk</td>
+              <td>...</td>
+              <td>100</td>
+              <td>1000rs</td>
+              <td class="Describe">Lorem ipsum dolor sit amet consectetur adipisicing elit.</td>
+              <td><button type="button"><a th:href="@{host/event/edit}">Edit</a></button>
+                  <button type="button">Delete</button></td>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>Conference</td>
+              <td>Hotel Tulip</td>
+              <td>jkjkjk</td>
+              <td>...</td>
+              <td>100</td>
+              <td>1000rs</td>
+              <td class="Describe">Lorem ipsum dolor sit amet consectetur adipisicing elit.</td>
+              <td><button type="button"><a th:href="@{/host/event/edit}">Edit</a></button>
+                  <button type="button">Delete</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+</body>
+</html>

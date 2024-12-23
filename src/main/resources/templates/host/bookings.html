@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" th:href="@{/css/host/bookings}.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="event">
+          <a th:href="@{/host/home}">Event Management</a>
+        </div>
+        <div class="menu">
+          <a th:href="@{/host/event}">Event</a>
+          <a th:href="@{/host/venue}">Venue</a>
+          <div class="book"><a th:href="@{/host/bookings}">All Bookings</a></div>
+          <a th:href="@{/host/profile}"
+            ><img th:src="@{/img/R.png}" alt="" class="image1"
+          /></a>
+        </div>
+      </nav>
+    <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Order id</th>
+              <th>Event name</th>
+              <th>Venue name</th>
+              <th>Guest name</th>
+              <th>Booked date</th>
+              <th>Ticket id</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>Conference</td>
+              <td>Hotel Tulip</td>
+              <td>jkjkjk</td>
+              <td>2025/1/1</td>
+              <td>0010</td>
+              
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Conference</td>
+                <td>Hotel Tulip</td>
+                <td>jkjkjk</td>
+                <td>2025/1/1</td>
+                <td>0010</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+</body>
+</html>

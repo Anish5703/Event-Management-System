@@ -1,0 +1,105 @@
+* {
+    padding: 0%;
+    margin: 0;
+    font-family: sans-serif;
+}
+.container{
+    height: 90vh;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+ }
+.container-sub{
+    width: 400px;
+    padding: 20px;
+    background: white;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    border-radius: 8px;
+}
+.container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.form-group {
+    margin-bottom: 15px;
+}
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+.form-group input {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+}
+.form-group button {
+    width: 100%;
+    padding: 10px;
+    background-color: #d00000;
+    border: none;
+    color: white;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.form-group button:hover {
+    background-color: #ffd500;
+} 
+.navbar {
+    height: 10vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffffff;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.31);
+     padding: 0.5rem 1rem;
+}
+
+.navbar a {
+    font-size: 16px;
+    font-weight: bold;
+    color: #d00000;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+}
+.navbar a:hover {
+    
+    border-radius: 4px;
+}
+.navbar .event {
+   color: #d00000;
+    width: 23%;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bolder;
+}
+.navbar .menu {
+    width: 30%;
+    height: 10vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.menu .add{
+    color: #d00000;
+}
+.menu a{
+    color: black;
+}
+.menu a:hover{
+    color: #d00000;
+}
+.event a{
+    color: black;
+    font-size: 24px;
+}
+.event a:hover{
+    color: #d00000;
+}
+.image1{
+    height: 9vh;
+    width: 50px;
+}
+
+

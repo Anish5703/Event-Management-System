@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=\, initial-scale=1.0" />
+    <title>Host Homepage</title>
+    <link rel="stylesheet" th:href="@{/css/host/homepage.css}"/>
+    <link
+      th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css}"
+    />
+    <link
+      th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/fontawesome.min.css}"
+    />
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="event">
+        <a th:href="@{/host/homepage}">Event Management</a>
+      </div>
+      <div class="menu">
+        <a th:href="@{/host/event}">Event</a>
+        <a th:href="@{host/venue}">Venue</a>
+        <a th:href="@{host/bookings}">All Bookings</a>
+        <a th:href="@{host/profile}"
+          ><img src="@{/img/R.png" alt="" class="image1"
+        /></a>
+      </div>
+    </nav>
+    <div class="container"></div>
+    <div class="container2">
+      <h1>Search Events</h1>
+      <div class="search-bar">
+        <input type="text" placeholder="Search Event here..." />
+        <button>Search</button>
+        <select>
+          <option>Select Event Category</option>
+        </select>
+        <button>Search</button>
+      </div>
+      <div class="event-cards">
+        <div class="card">
+          <img th:src="@{/img/img3.avif}" alt="Shubh Concert Event" />
+          <div class="card-content">
+            <h2>Shubh Concert Event</h2>
+            <p>Shubh Concert Event - Shubh will perform on 3 songs...</p>
+            <p>Category: Entertainment</p>
+            <p>Available Tickets: 1000</p>
+            <p>Ticket Price: ₹20,000</p>
+          </div>
+        </div>
+        <div class="card">
+          <img th:src="@{/img/img4.avif}" alt="" />
+          <div class="card-content">
+            <h2>Sidhu Moosewala Royal Show</h2>
+            <p>Sidhu Moosewala Royal Show, He will be performing...</p>
+            <p>Category: Entertainment</p>
+            <p>Available Tickets: 10,000</p>
+            <p>Ticket Price: ₹50,000</p>
+          </div>
+        </div>
+        <div class="card">
+          <img th:src="@{/img/img4.avif}" alt="" />
+          <div class="card-content">
+            <h2>Sidhu Moosewala Royal Show</h2>
+            <p>Sidhu Moosewala Royal Show, He will be performing...</p>
+            <p>Category: Entertainment</p>
+            <p>Available Tickets: 10,000</p>
+            <p>Ticket Price: ₹50,000</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <div class="sub-footer">
+        <div class="footer-part1">
+          <div class="footer-heading">
+            <span>Event Management</span>
+          </div>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. A
+            exercitationem, architecto sint consequatur officia molestiae vero
+            repudiandae dignissimos
+          </p>
+        </div>
+
+        <div class="footer-part1">
+          <div class="footer-heading">
+            <span>Contact Us</span>
+          </div>
+          <div class="footer-contact">
+            <li>
+              <i class="fa fa-envelope" aria-hidden="true"></i> abc11@gmail.com
+            </li>
+            <li><i class="fa fa-phone" aria-hidden="true"></i> 9700000000</li>
+            <li>
+              <i class="fa fa-map-marker" aria-hidden="true"></i> Butwal,Nepal
+            </li>
+            <li><i class="fa fa-mobile" aria-hidden="true"></i> 071 000000</li>
+          </div>
+        </div>
+        <div class="footer-part1">
+          <div class="footer-heading">
+            <span>Sign Up</span>
+          </div>
+          <div class="sign">
+            <input
+              type="email"
+              name=""
+              id="sign"
+              placeholder="Enter Your Email"
+            />
+            <button type="submit">Submit</button>
+          </div>
+          <div class="icon">
+            <li><i class="fa-brands fa-facebook-f"></i></li>
+            <li><i class="fab fa-twitter"></i></li>
+            <li><i class="far fa-comment"></i></li>
+
+            <li><i class="fab fa-instagram"></i></li>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="copy-right">
+      <h1>© Copyright 2024 Made By Anish Paudel</h1>
+    </div>
+  </body>
+</html>

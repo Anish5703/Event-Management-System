@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Event Management</title>
+</head>
+<body>
+    <h2>Event Management</h2>
+
+    <!-- Add Event Form -->
+    <form th:action="@{/event/add}" method="post" th:object="${event}">
+        <h3>Add a New Event</h3>
+        <label for="eventName">Event Name:</label>
+        <input type="text" id="eventName" name="eventName" th:field="*{name}" required><br />
+
+       <label for="venue">Venue:</label>
+    <select id="venue" name="venue" th:field="*{venue}"required>
+      <option value="" disabled selected>Select a venue</option> 
+        <option th:each="ven : ${venueList}" 
+                th:value="${ven}" 
+                th:text="${ven.name + ' - ' + ven.address}">
+        </option>
+    </select><br>
+           <label for="category">Category:</label>
+    <select id="category" name="category" th:field="*{category}" required />
+      <option value="" disabled selected>Select a Category</option> 
+        <option th:each="cat : ${categoryList}" 
+                th:value="${cat}" 
+                th:text="${cat.name}">
+        </option>
+    </select><br>
+
+        <label for="regStartDateTime">Registration Start Date/Time:</label>
+        <input type="datetime-local" id="regStartDateTime" name="regStartDateTime" th:field="*{reg_start_dateTime}" required><br />
+
+        <label for="regEndDateTime">Registration End Date/Time:</label>
+        <input type="datetime-local" id="regEndDateTime" name="regEndDateTime" th:field="*{reg_end_dateTime}"required><br />
+
+        <label for="eventStartDateTime">Event Start Date/Time:</label>
+        <input type="datetime-local" id="eventStartDateTime" name="eventStartDateTime" th:field="*{event_start_dateTime}" required><br />
+
+        <label for="eventEndDateTime">Event End Date/Time:</label>
+        <input type="datetime-local" id="eventEndDateTime" name="eventEndDateTime" th:field="*{event_end_dateTime}" required><br />
+
+        <label for="guestCapacity">Guest Capacity:</label>
+        <input type="number" id="guestCapacity" name="guestCapacity" min="1" th:field="*{guestCapacity}" required><br />
+
+        <label for="ticketPrice">Ticket Price:</label>
+        <input type="number" id="ticketPrice" name="ticketPrice" min="0" th:field="*{ticketPrice}"required><br />
+        
+        <label for="description">Description :</label>
+        <input type="text" id="description" name="description" th:field="*{description}" required><br />
+
+        <button type="submit">Add Event</button>
+        <p style="color:green;">[[${addStatus}]]</p>
+    </form>
+
+    <hr>
+
+    <!-- Search Event Form -->
+    <form th:action="@{/event/search}" method="get">
+        <h3>Search for an Event</h3>
+        <label for="searchEventName">Event Name:</label>
+        <input type="text" id="searchEventName" name="eventName" required>
+        <button type="submit">Search</button>
+         <p style="color:red;">[[${searchStatus}]]</p>
+        <div th:if="${eventListByName != null}">
+            <div th:each="event : ${eventListByName}">
+                <p th:text="'Name: ' + ${event.name}"></p>
+                <p th:text="'Host ID: ' + ${event.hostId}"></p>
+                <p th:text="'Venue ID: ' + ${event.venueId}"></p>
+                <p th:text="'Registration Start Date/Time: ' + ${event.reg_start_dateTime}"></p>
+                <p th:text="'Registration End Date/Time: ' + ${event.reg_end_dateTime}"></p>
+                <p th:text="'Event Start Date/Time: ' + ${event.event_start_dateTime}"></p>
+                <p th:text="'Event End Date/Time: ' + ${event.event_end_dateTime}"></p>
+                <p th:text="'Ticket Price: ' + ${event.ticketPrice}"></p>
+                <p th:text="'Guset Capacity: ' + ${event.guestCapacity}"></p>
+                 <p th:text="'Status: ' + ${event.status}"></p>
+                <p th:text="'Description: ' + ${event.description}"></p>
+                <hr>
+            </div>
+    </form>
+
+    <hr>
+    
+    <!--Search to Edit Event-->
+    <form th:action="@{/event/edit}" method="get">
+		
+		<h3>Type Event id to edit</h3>
+		<lablel for="eventId">Event Id:</lablel>
+		<input type="number" id="eventId" name="eventId" required />
+		<p style="color:red;">[[${isEventFound}]]</p>
+		<br />
+		<button type="submit">Search Event</button>
+	</form>
+
+    <!-- Edit Event Form -->
+    <form th:action="@{/event/edit/update}" method="post" th:object="${updatedEvent}">
+		
+        <h3>Edit an Existing Event</h3>
+        <!--Filling event data -->
+        <div th:if ="${event != null}">    
+ <label for="newEventId">Event Id:</label>
+ <input type="number" id="newEventId" name="newEventId" 
+ th:value="${event.id}" th:field="*{id}" readonly required /> <br />
+     
+<label for="newEventName">Event Name:</label>
+<input type="text" id="newEventName" name="eventName" 
+  th:value="${event.name}" th:field="*{name}"  required /><br />
+
+<label for="newHostId">Host ID:</label>
+<input type="number" id="newHostId" name="hostId"
+ th:value="${event.host}" readOnly required><br>
+
+<label for="newVenueId">Venue:</label>
+<select id="newVenueId" name="venueId" required >
+<!-- <option th:value="${event.venue}" th:text="${event.venue.name}" ></option>  -->
+  <option th:each="venue : ${venueList}" 
+          th:value="${venue}" 
+          th:text="${venue.name + ' - ' + venue.address}">
+  </option>
+</select><br />
+
+<label for="newRegStartDateTime">Registration Start Date/Time:</label>
+<input type="datetime-local" id="newRegStartDateTime" name="regStartDateTime" 
+ th:value="${event.reg_start_dateTime}" th:field="*{reg_start_dateTime}"required /><br />
+
+<label for="newRegEndDateTime">Registration End Date/Time:</label>
+<input type="datetime-local" id="newRegEndDateTime" name="regEndDateTime" 
+ th:value="${event.reg_end_dateTime}" th:field="*{reg_end_dateTime}"required /><br />
+
+<label for="newEventStartDateTime">Event Start Date/Time:</label>
+<input type="datetime-local" id="newEventStartDateTime" name="eventStartDateTime" 
+ th:value="${event.event_start_dateTime}" th:field="*{event_start_dateTime}"required /><br />
+
+<label for="newEventEndDateTime">Event End Date/Time:</label>
+<input type="datetime-local" id="newEventEndDateTime" name="eventEndDateTime" 
+ th:value="${event.event_end_dateTime}" th:field="*{event_end_dateTime)"required /><br />
+
+<label for="newGuestCapacity">Guest Capacity:</label>
+<input type="number" id="newGuestCapacity" name="guestCapacity" min="1"
+ th:value="${event.guestCapacity}" th:field="*{guestCapacity}" required /><br />
+
+<label for="newTicketPrice">Ticket Price:</label>
+<input type="number" id="newTicketPrice" name="ticketPrice" min="0" 
+ th:value="${event.ticketPrice}" th:field="*{ticketPrice}" required /><br />
+
+ <label for="description">Description :</label>
+ <input type="text" id="description" name="description" 
+  th:value="${event.description}" th:field="*{description}" required /> <br />
+
+</div>
+        <button type="submit">Update Event</button>
+        <p th:if="${updateStatus != null}" style="color:green;">[[${updateStatus}]]</p>
+    </form>
+
+    <hr>
+
+    <!-- Delete Event Form -->
+    <form th:action="@{/event/delete}" method="post">
+        <h3>Delete an Existing Event</h3>
+        <label for="deleteEventId">Event ID:</label>
+        <input type="number" id="deleteEventId" name="eventId" required>
+        <button type="submit">Delete</button>
+        <p th:if="${deleteStatus != null}" style="color:red;">[[${deleteStatus}]]</p>
+    </form>
+
+    <hr>
+
+    <!-- List All Events -->
+    <form th:action="@{/event/list}" method="get">
+        <button type="submit">List All Events</button>
+        <div th:if="${eventList != null}">
+            <h3>All Events:</h3>
+            <div th:each="event : ${eventList}">
+				<p th:text="'Id: ' + ${event.id}"></p>
+                <p th:text="'Name: ' + ${event.name}"></p>
+                <p th:text="'Host ID: ' + ${event.hostId}"></p>
+                <p th:text="'Venue ID: ' + ${event.venueId}"></p>
+                <p th:text="'Registration Start Date/Time: ' + ${event.reg_start_dateTime}"></p>
+                <p th:text="'Registration End Date/Time: ' + ${event.reg_end_dateTime}"></p>
+                <p th:text="'Event Start Date/Time: ' + ${event.event_start_dateTime}"></p>
+                <p th:text="'Event End Date/Time: ' + ${event.event_end_dateTime}"></p>
+                <p th:text="'Ticket Price: ' + ${event.ticketPrice}"></p>
+                <p th:text="'Guset Capacity: ' + ${event.guestCapacity}"></p>
+                <p th:text="'Status: ' + ${event.status}"></p>
+                <p th:text="'Description: ' + ${event.description}"></p>
+                <hr>
+            </div>
+        </div>
+    </form>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Venue Management</title>
+</head>
+<body>
+    <h2>Venue Management</h2>
+
+    <!-- Add Venue Form -->
+    <form th:action="@{/venue/add}" method="post" th:object="${venue}">
+        <h3>Add a New Venue</h3>
+        <label for="venueName">Venue Name:</label>
+        <input type="text" id="venueName" name="venueName" th:field="*{venue.name}"required><br>
+
+        <label for="venueAddress">Address:</label>
+        <input type="text" id="venueAddress" name="venueAddress" th:field="*{venue.address}"required><br>
+
+        <label for="venuePhone">Phone:</label>
+        <input type="text" id="venuePhone" name="venuePhone"  th:field="*{venue.phone}"required><br>
+
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" rows="4" cols="50"
+         th:field="*{venue.description}" ></textarea><br>
+
+        <button type="submit">Add Venue</button>
+        <p th:if="${newVenueAdded == null}" style="color:red;">[[${addStatus}]]</p>
+    </form>
+
+    <hr>
+
+    <!-- Search Venue Form -->
+    <form th:action="@{/venue/search}" method="post">
+        <h3>Search for a Venue</h3>
+        <label for="searchVenueName">Venue Name:</label>
+        <input type="text" id="searchVenueName" name="venueName" required>
+        <button type="submit">Search</button>
+        <div th:if="${venueByName != null}">
+            <h4>Search Results:</h4>
+            <p th:text="${venueByName.name}"></p>
+            <p th:text="${venueByName.address}"></p>
+            <p th:text="${venueByName.phone}"></p>
+            <p th:text="${venueByName.discription}"></p>
+        </div>
+        <p style="color:red;">[[${searchStatus}]]</p>
+    </form>
+
+    <hr>
+
+    <!-- Edit Venue Form -->
+    <form th:action="@{/venue/edit}" method="post">
+        <h3>Edit an Existing Venue</h3>
+        <label for="venueOldName">Current Venue Name:</label>
+        <input type="text" id="venueOldName" name="venueOldName" required><br>
+
+        <label for="venueNewName">New Venue Name:</label>
+        <input type="text" id="venueNewName" name="venueNewName"><br>
+
+        <label for="address">New Address:</label>
+        <input type="text" id="address" name="address"><br>
+
+        <label for="phone">New Phone:</label>
+        <input type="text" id="phone" name="phone"><br>
+
+        <label for="description">New Description:</label>
+        <textarea id="description" name="description" rows="4" cols="50"></textarea><br>
+
+        <button type="submit">Update Venue</button>
+        <p th:if="${updateStatus != null}" style="color:green;">[[${updateStatus}]]</p>
+    </form>
+
+    <hr>
+
+    <!-- Delete Venue Form -->
+    <form th:action="@{/venue/delete}" method="post">
+        <h3>Delete an Existing Venue</h3>
+        <label for="deleteVenueName">Venue Name:</label>
+        <input type="text" id="deleteVenueName" name="venueName" required>
+        <button type="submit">Delete</button>
+        <p th:if="${deleteStatus != null}" style="color:red;">[[${deleteStatus}]]</p>
+    </form>
+    
+    <!-- List all available venue -->
+    <form th:action="@{/venue/list}" method="get">
+		<button type="submit">List all venue</button>
+		<p style="color:red;">[[${listStatus}]]</p>
+		<div th:if="${venueList != null}">
+			<div th:each="venue:${venueList}">
+		    <div>
+		    <p th:text="${venue.name}"></p>
+            <p th:text="${venue.address}"></p>
+            <p th:text="${venue.phone}"></p>
+            <p th:text="${venue.discription}"></p>
+            </div>
+			</div>
+			</div>
+
+	</form>
+</body>
+</html>
