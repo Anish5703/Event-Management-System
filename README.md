@@ -1,2 +1,6 @@
 # Event-Management-System
-Project Based on managing events and is developing using thymeleaf and spring boot 
+This project is developed to create , manage and particpate events online .
+Based On :
+Front end : thymeleaf ,css ,js
+Backend : sprinboot, jpa
+database : postgresql
