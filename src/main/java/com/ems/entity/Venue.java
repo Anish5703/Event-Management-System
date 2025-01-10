@@ -21,6 +21,9 @@ public class Venue {
 	
 	private String description;
 	
+
+	private String addedBy;
+	
 	public Venue()
 	{
 		
@@ -59,12 +62,12 @@ public class Venue {
 		this.address = address;
 	}
 
-	public String getDiscription() {
+	public String getDescription() {
 		return description;
 	}
 
-	public void setDiscription(String discription) {
-		this.description = discription;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public String getPhone() {
@@ -75,6 +78,26 @@ public class Venue {
 		this.phone = phone;
 	}
 	
+	public void setAddedBy(String username)
+	{
+		this.addedBy = username;
+	}
+	public String getAddedBy()
+	{
+		return this.addedBy;
+	}
+	
+	@Override
+    public String toString() {
+        return "Venue{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", phone='" + phone + '\'' +
+                ", description='" + description + '\'' +
+                ", addedBy='" + addedBy + '\'' +
+                '}';
+    }
 	
 	
 }

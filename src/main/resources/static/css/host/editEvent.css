@@ -99,3 +99,11 @@
 .form-group button:hover {
     background-color: #ffd500;
 }
+.preview-image {
+   width: 40%;
+   height: 20vh;
+    border-radius: 5px;
+    display: block;
+    margin: 0 auto;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}

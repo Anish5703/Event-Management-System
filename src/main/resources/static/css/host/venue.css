@@ -98,22 +98,18 @@ tbody td {
     padding: 10px;
     border: 1px solid #ddd;
     text-align: center;
-}
-button{
+}button {
     height: 5vh;
     width: 60px;
     color: white;
     background-color: #d00000;
     border: 1px solid rgb(199, 199, 199);
-}
-button a{
     text-decoration: none;
-    color: white;
 }
-button:hover{
+
+button:hover {
     background-color: rgb(248, 189, 0);
-}
-button a:hover{
+    cursor: pointer; /* This ensures the pointer changes to a hand */
     text-decoration: none;
 }
 

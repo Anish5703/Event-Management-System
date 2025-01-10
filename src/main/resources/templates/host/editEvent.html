@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Edit Venue</title>
-    <link rel="stylesheet" href="./EditEvent.css" />
+    <link rel="stylesheet" th:href="@{/css/host/EditEvent.css}" />
   </head>
   <body>
     <nav class="navbar">
@@ -21,7 +21,8 @@
     </nav>
     <div class="form-container">
       <h2>Edit Event</h2>
-      <form th:action="@{/host/event/save" th:object="${event}">
+      <form method="post" th:action="@{/host/event/update/{id}(id=${event.id})}" 
+        enctype="multipart/form-data" th:object="${event}">
         <div class="form-group">
           <label for="event-name">Event Name:</label>
           <input
@@ -29,6 +30,7 @@
             id="event-name"
             name="event-name"
             placeholder="Enter event name"
+            th:field="*{name}"
             required
           />
         </div>
@@ -38,7 +40,7 @@
             type="datetime-local"
             id="regStartDateTime"
             name="regStartDateTime"
-            th:field="*{reg_start_dateTime}"
+              th:field="*{reg_start_dateTime}" 
             required
           />
         </div>
@@ -48,10 +50,11 @@
             type="datetime-local"
             id="regEndDateTime"
             name="regEndDateTime"
-            th:field="*{reg_end_dateTime}"
+             th:field="*{reg_end_dateTime}"   
             required
           />
         </div>
+
         <div class="form-group">
           <label for="eventStartDateTime">Event Start Date/Time:</label>
           <input
@@ -69,17 +72,31 @@
             id="eventEndDateTime"
             name="eventEndDateTime"
             th:field="*{event_end_dateTime}"
+            th:value="${event.event_end_dateTime}"
             required
           />
         </div>
-        <div class="form-group">
-            <label for="event-type">Event Type</label>
-            <select id="event-type" name="event-type" required>
-              <option value="conference">Conference</option>
-              <option value="workshop">Workshop</option>
-              <option value="webinar">Webinar</option>
-              <option value="social">Social Event</option>
-            </select>
+                <div class="form-group">
+            <label for="category">Category</label>
+            <select id="category" name="category" th:field="*{category}"  required /> 
+        <option th:each="cat : ${categoryList}" 
+                th:value="${cat.id}" 
+                th:text="${cat.name}"
+                th:selected="${cat.id == event.category.id}">
+                </option>
+                     
+        </option>
+    </select><br>
+          </div>
+                  <div class="form-group">
+            <label for="venue">Venue</label>
+            <select id="venue" name="venue" th:field="*{venue}" required />
+           <option th:each="ven : ${venueList}"
+                th:value="${ven.id}" 
+                th:text="${ven.name +','+ven.address}"
+                th:selected="${ven.id == event.venue.id}">
+        </option>
+    </select><br>
           </div>
         <div class="form-group">
           <label for="guestCapacity">Guest Capacity:</label>
@@ -118,6 +135,13 @@
               required
             />
           </div>
+        <div class="form-group">
+            <img th:src="@{'/img/event/'+ ${event.imageId}}" alt="Event Image" class="preview-image">
+        </div>
+            <div class="form-group">
+            <label for="eventImage">Select image:</label>
+            <input type="file" id="eventImage" name="eventImage" accept="image/*" required>
+        </div>
         <div class="form-group">
           <button type="submit">Update</button>
         </div>

@@ -14,10 +14,22 @@ public class CategoryService {
 	@Autowired
 	private CategoryRepository categoryRepository;
 	
-	//get all available categories 
+	//find  all available categories 
 	public List<Category> getCategoryList()
 	{
 		return categoryRepository.findAll();
+	}
+	
+	//find category with name
+	public Category getCategory(String categoryName)
+	{
+		return categoryRepository.findByName(categoryName);
+	}
+	
+	//find category by id
+	public Category getCategoryById(int id)
+	{
+		return categoryRepository.getById(id);
 	}
 
 }

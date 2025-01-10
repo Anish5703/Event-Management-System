@@ -20,6 +20,7 @@
         <table>
           <thead>
             <tr>
+			  <th>S.N</th>
               <th>Id</th>
               <th>Event Name</th>
               <th>Venue</th>
@@ -32,30 +33,18 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>1</td>
-              <td>Conference</td>
-              <td>Hotel Tulip</td>
-              <td>jkjkjk</td>
-              <td>...</td>
-              <td>100</td>
-              <td>1000rs</td>
-              <td class="Describe">Lorem ipsum dolor sit amet consectetur adipisicing elit.</td>
-              <td><button type="button"><a th:href="@{host/event/edit}">Edit</a></button>
-                  <button type="button">Delete</button></td>
-            </tr>
-            <tr>
-              <td>1</td>
-              <td>Conference</td>
-              <td>Hotel Tulip</td>
-              <td>jkjkjk</td>
-              <td>...</td>
-              <td>100</td>
-              <td>1000rs</td>
-              <td class="Describe">Lorem ipsum dolor sit amet consectetur adipisicing elit.</td>
-              <td><button type="button"><a th:href="@{/host/event/edit}">Edit</a></button>
-                  <button type="button">Delete</button></td>
-            </tr>
+			<tr th:if="${eventList != null}" th:each="event,iteration : ${eventList}">
+			 <td th:text="${iteration.count}"></td>
+            <td th:text="${event.id}"></td>
+            <td th:text="${event.name}"></td>
+            <td th:text="${event.venue.name}"></td>
+            <td th:text="${event.category.name}"></td>
+            <td th:text="${event.status}"></td>
+            <td th:text="${event.guestCapacity}"></td>
+            <td th:text="${event.ticketPrice}"></td>
+            <td  class="describe" th:text="${event.description}"></td>
+				<td><button type="button" th:onclick="'location.href=\'' + @{/host/event/edit/{id}(id=${event.id})} + '\''">Edit</button>
+                <button type="button" th:onclick="'location.href=\'' + @{/host/event/delete/{id}(id=${event.id})} + '\''">Delete</button></td>
           </tbody>
         </table>
       </div>

@@ -32,11 +32,12 @@ public class EventPageController {
 //display event page 
 	@GetMapping("/event")
 	public String showEventPage(Model model) {
-		model.addAttribute("updatedEvent",new Event());
-		model.addAttribute("event",new Event());
+		model.addAttribute("categoryList",categoryService.getCategoryList());		
+		model.addAttribute("eventList",eventService.getAllEventList());
 		return "event";  //event dashboard page
 	}
 
+	/*
 // add event
 	@PostMapping("/event/add")
 	public String addEvent(@ModelAttribute Event event, Model model,@CookieValue(name="id") String cookieId){
@@ -49,6 +50,7 @@ public class EventPageController {
 			model.addAttribute("addStatus","Event Creation Failed");
 		return "event.html"; //
 	}
+	*/
 
 //event update
 	@GetMapping("event/edit")
@@ -65,7 +67,7 @@ public class EventPageController {
 	     }
 		else
 		{
-			model.addAttribute("venuesList",venueService.getVenueList());
+			model.addAttribute("venuesList",venueService.getAllVenueList());
 			model.addAttribute("categoryList",categoryService.getCategoryList());
 			model.addAttribute("editStatus","Event Cannot be Found");
 			return "event.html";  //return back to dashboard page
@@ -93,7 +95,7 @@ public class EventPageController {
 	@GetMapping("/event/search")
 	public String searchEvent(@RequestParam(name="eventName")String eventName,Model model)
 	{
-		List<Event> eventList = eventService.getEventList();
+		List<Event> eventList = eventService.getAllEventList();
 		
 		if(eventList != null)
 		{
@@ -112,7 +114,7 @@ public class EventPageController {
 	@GetMapping("/event/list")
 	public String listEvent(Model model)
 	{		
-		List<Event> eventList = eventService.getEventList();
+		List<Event> eventList = eventService.getAllEventList();
 		
 		if(eventList != null)
 		{

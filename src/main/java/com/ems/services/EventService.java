@@ -1,10 +1,16 @@
 package com.ems.services;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.ems.entity.Event;
 import com.ems.entity.User;
@@ -24,39 +30,59 @@ public class EventService {
 	@Autowired
 	private EventRepository eventRepository;	
 	
+	//getting directory from application.properties
+	@Value("${event.upload-dir}")
+	private String uploadDirectory;
+	
 	//adding new event
-	public Event addEvent(Event event,String cookieId)
+	public Event addEvent(Event event)
 	{
-		User user = userRepository.findByCookieId(cookieId);
-		if(user == null || user.getRole() == UserType.guest)
+		try {
+	    return eventRepository.save(event);
+		}
+		catch(Exception e)
 		{
+			System.out.println("Unable to create new event"+e);
 			return null;
 		}
-		else
-		{
-			//setting host to the event
-			event.setHost(user);
-			//saving event to the repository
-			return eventRepository.save(event);
-		}
-		
 		
       }
+    
 	
 	//get event by id
 	public Event getEvent(int eventId) throws EventNotFoundException
 	{
 		Event event = eventRepository.findEventById(eventId);
-		if(event != null)
+		if(event == null)
 			throw new EventNotFoundException("Event Not Found in Database");
 		return event;
 	}
 	
+	
 	//get all available events 
-	public List<Event> getEventList()
+	public List<Event> getAllEventList()
 	{
 		return eventRepository.findAll();
 	}
+	
+	//get specific hosts event list
+	public List<Event> getHostEventList(String username)
+	{
+		List<Event> eventList = new ArrayList<>();
+		List<Event> allEventList = eventRepository.findAll();
+		if(allEventList != null)
+		{
+			for(Event event : allEventList)
+			{
+				if(event.getHost().getUsername().equals(username))
+				{
+					eventList.add(event);
+				}
+			}
+		}
+		return eventList;
+	}
+	
 	
 	//update event 
 	public Event updateEvent(Event event)
@@ -84,6 +110,34 @@ public class EventService {
 			System.out.println("Event Not deleted :"+ex);
 			return false;
 		}
+	}
+	
+	//generate event image new url
+	public String generateEventImageId(MultipartFile file)
+	{
+		try {
+			 // Ensure directory exists
+            Path directoryPath = Paths.get(uploadDirectory);
+            if (!Files.exists(directoryPath)) {
+                Files.createDirectories(directoryPath);  // Create directory if not exists
+            }
+			
+		String originalFileName = file.getOriginalFilename();
+		//get unique file name
+		String uniqueFileName = System.currentTimeMillis()+"_"+originalFileName;
+		//set file name with  the default directory
+		Path fileNameWithPath = Paths.get(uploadDirectory,uniqueFileName);
+		//save file to the directory
+        Files.write(fileNameWithPath, file.getBytes());
+		return uniqueFileName;
+		}
+		catch(Exception ex)
+		{
+			System.out.println("Image File Not Uploaded ");
+			ex.printStackTrace();
+			return "";
+		}
+		
 	}
 	
 	

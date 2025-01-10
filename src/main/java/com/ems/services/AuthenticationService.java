@@ -33,14 +33,19 @@ public class AuthenticationService {
 			return null;
 	}
 	
-	//authenticate user
-	public User authenticateUser(String email,String password,
+	/*authentication for user login 
+	  Can be login by both email and username
+	 */
+	
+	public User authenticateUserLogin(String loginName,String password,
 			HttpServletRequest req,HttpServletResponse resp)
 	{
-		
-		if(userService.isEmailExists(email) == true)
+		//validating if email exists or the username exists
+		if(userService.isEmailExists(loginName) == true || userService.isUsernameExists(loginName))
 		{
-			User user = userRepository.findByEmail(email);     //validating if email exists
+			User user = userRepository.findByEmail(loginName);  
+			if(user==null)
+				user = userRepository.findByUsername(loginName);
 			if(user.getPassword().equals(password))
 			{
 				  CookieGenerator cg = new CookieGenerator();
@@ -63,16 +68,39 @@ public class AuthenticationService {
 		String cookieId = CookieGenerator.getCookieId(req,resp);
 		if(cookieId == null)
 			throw new UserNotFoundException();
+		User user = userRepository.findByCookieId(cookieId);
+		if(user == null)
+			throw new UserNotFoundException();
+		else
+		   return user.getRole();
+			
+	}
+	
+	//get User by cookie 
+	public User getUserByCookie(HttpServletRequest req,HttpServletResponse resp) throws Exception
+	{
+		String cookieId = CookieGenerator.getCookieId(req,resp);
+		if(cookieId == null)
+			throw new UserNotFoundException();
 		else
 		{
 		User user = userRepository.findByCookieId(cookieId);
 		if(user == null)
 			throw new UserNotFoundException();
 		else
-		   return user.getRole();
+		   return user;
 		}
-			
 	}
+	
+	//get Username by cookie
+    public String getUsernameByCookie(HttpServletRequest req,HttpServletResponse resp)
+    {
+    	String cookieId = CookieGenerator.getCookieId(req, resp);
+    	if(cookieId != null)
+    	     return userRepository.findByCookieId(cookieId).getUsername();
+    	else
+    		return null;
+    }
 	
 	//logout user profile
 	public boolean logoutProfile(HttpServletRequest req, HttpServletResponse resp)
@@ -86,5 +114,27 @@ public class AuthenticationService {
 		}
 		else
 			return false;
+	}
+	
+	//Host Authorization
+	public void hostAuthorization(HttpServletRequest req,HttpServletResponse resp) throws Exception
+	{
+		if(this.identifyUserRole(resp, req) != UserType.host)
+			throw new OnlyHostIsAuthorizedException();
+	}
+	
+	//Guest Authorization
+	public void guestAuthorization(HttpServletRequest req,HttpServletResponse resp) throws Exception
+	{
+		if(this.identifyUserRole(resp, req) != UserType.guest)
+			throw new OnlyGuestIsAuthorizedException();
+	}
+	
+	// Owner Authorization
+	public void ownerAuthorization(HttpServletRequest req,HttpServletResponse resp,
+			String username) throws Exception
+	{
+		if(!this.getUsernameByCookie(req, resp).equals(username))
+			throw new OwnerAuthorizationFailedException();
 	}
 }

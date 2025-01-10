@@ -53,7 +53,11 @@ public class User {
 	public Instant getCreatedAt() {
 		return createdAt;
 	}
-
+    
+	public void setCreatedAt(Instant createdAt)
+	{
+		this.createdAt = createdAt;
+	}
 
 	//default constructor
 	public User()
@@ -61,22 +65,15 @@ public class User {
 		super();
 	}
 	
-	//param constructor
-
-	public User(String username,String name, String password, String email, String phone,UserType userRole, String gender) {
-		this.username = username;
-		this.name = name;
-		this.password = password;
-		this.email = email;
-		this.phone = phone;
-		this.userRole = userRole;
-		this.gender = gender;
-	}
 	
 	public int getId() {
 		return id;
 	}
 
+	public void setId(int id)
+	{
+		this.id = id;
+	}
 	
 	public String getUsername() {
 		return username;
@@ -132,4 +129,22 @@ public class User {
 	public void setCookieId(String cookieId) {
 		this.cookieId = cookieId;
 	}
+	
+	@Override
+	public String toString() {
+	    return "User{" +
+	            "id=" + id +
+	            ", username='" + username + '\'' +
+	            ", name='" + name + '\'' +
+	            ", password='" + password + '\'' +
+	            ", email='" + email + '\'' +
+	            ", phone='" + phone + '\'' +
+	            ", gender='" + gender + '\'' +
+	            ", userRole=" + userRole +
+	            ", cookieId='" + cookieId + '\'' +
+	            ", createdAt=" + createdAt +
+	            '}';
+	}
+
+
 }

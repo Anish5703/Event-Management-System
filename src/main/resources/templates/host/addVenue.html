@@ -4,21 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Venue</title>
-    <link rel="stylesheet" th:href="@{/css/host/addVenue.css}">
+    <link rel="stylesheet" th:href="@{/css/host/editVenue.css}">
 </head>
 <body>
     <nav class="navbar">
-        <div class="event"><a th:href="@{host/home}">Event Management</a></div>
+        <div class="event"><a th:href="@{/host/home}">Event Management</a></div>
         <div class="menu">
-            <a th:href="@{host/addVenue}" class="add">Add Venue</a>
-            <a th:href="@{/host/venue}">View Venue</a>
+			<a th:href="@{/host/allvenue}">All Venue</a>
+			<a th:href="@{/host/venue}">My Venue</a>
+            <a th:href="@{/host/venue/add}" class="add">Add Venue</a>
+        
             <a th:href="@{/host/profile}"><img th:src="@{/img/R.png}" alt="" class="image1"></a>
         </div>
     </nav>
     <div class="container">
         <div class="container-sub">
           <h2>Add Venue</h2>
-          <form action="" method="POST">
+          <form th:action="@{/host/venue/save}" method="POST" th:object="${venue}">
             <div class="form-group">
               <label for="name">Venue name:</label>
               <input
@@ -26,6 +28,7 @@
                 id="name"
                 name="name"
                 placeholder="Enter venue name"
+                th:field="*{name}"
                 required
               />
             </div>
@@ -37,6 +40,7 @@
                 id="address"
                 name="address"
                 placeholder="Enter address"
+                th:field="*{address}"
                 required
               />
             </div>
@@ -48,6 +52,7 @@
                 id="text"
                 name="number"
                 placeholder="Enter phone number"
+                th:field="*{phone}"
                 required
               />
             </div>
@@ -59,6 +64,7 @@
                 id="description"
                 name="description"
                 placeholder="Describe about venue"
+                th:field="*{description}"
                 required
               />
             </div>

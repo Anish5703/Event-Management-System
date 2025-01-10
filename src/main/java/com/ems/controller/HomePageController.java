@@ -13,6 +13,8 @@ import com.ems.cookies.CookieGenerator;
 import com.ems.entity.User;
 import com.ems.repository.UserRepository;
 import com.ems.services.AuthenticationService;
+import com.ems.services.CategoryService;
+import com.ems.services.EventService;
 import com.ems.services.UserService;
 import com.ems.user.UserType;
 
@@ -21,29 +23,37 @@ import jakarta.servlet.http.HttpServletResponse;
 
 @Controller
 public class HomePageController {
-
-	@Autowired
-	private UserRepository userRepository;
 	
 	@Autowired
 	private UserService userService;
 	
 	@Autowired
+	private CategoryService categoryService;
+	
+	@Autowired
+	private EventService eventService;
+	
+	@Autowired
 	private AuthenticationService authService;
 
+	//General Homepage
 	@GetMapping("/home")
-	public String getHomepage() {
+	public String getHomepage(Model model) {
+		
+		model.addAttribute("categoryList",categoryService.getCategoryList());		
+		model.addAttribute("eventList",eventService.getAllEventList());
 		return "homepage.html";
 	}
-
-	@GetMapping("/register")
+   
+	
+	@GetMapping("/signup")
 	public String getSignup(Model model) {
 		model.addAttribute("user",new User());
-		return "registration.html";
+		return "signup.html";
 	}
 	
 	//register new user
-	@PostMapping("/register/user")
+	@PostMapping("/signup/user")
 	public String registerUser(@ModelAttribute User user,
 			@RequestParam(name="userRole")String role,Model model)
 	{
@@ -54,7 +64,7 @@ public class HomePageController {
 			model.addAttribute("emailStatus","Email already exists");
 			if(userService.isUsernameExists(user.getUsername()) == true)
 			model.addAttribute("usernameStatus","Username already exists");
-			return "registration.html";  //return to the registration page
+			return "signup.html";  //return to the registration page
 		}
 		else
 		{
@@ -63,13 +73,13 @@ public class HomePageController {
 			if(newUser != null)                            //validate if user is add to the db
 			{ 
 				model.addAttribute("addStatus","User Added Successfully !");
-				return "login";  //return to login page
+				return "/login";  //return to login page
 			}
 			
 			else
 			{
 				model.addAttribute("addStatus","Failed to add new user");
-				return "registration"; //return to the registration page
+				return "/signup"; //return to the registration page
 				
 			}
 		}
@@ -85,10 +95,17 @@ public class HomePageController {
      if(user != null)
      {
     	 model.addAttribute("user",user);
-    	 return "userHomepage.html";     //return to user homepage
+    	 
+    	// Redirecting to authorized user page
+    	 if(user.getRole()==UserType.host)
+    	 return "redirect:/host/home";     
+    	 if(user.getRole()==UserType.admin)
+         return "redirect:/admin/home";
+    	 else
+    		 return "redirect:/guest/home";
      }
      else
-        return "login.html";      //return to the log in page
+        return "/login";      //return to the log in page
 	}
 	
 
@@ -96,23 +113,27 @@ public class HomePageController {
 	
 	//Validate Login
 	@PostMapping("/login/user")
-	public String validateLogin(@RequestParam(name="fullName")String username,
+	public String validateLogin(@RequestParam(name="fullName")String loginName,
 			@RequestParam(name="password")String password,
 			HttpServletRequest req,HttpServletResponse resp,
 			Model model) throws Exception
 	{
 		
-		User user = authService.authenticateUser(username, password, req, resp);
+		User user = authService.authenticateUserLogin(loginName, password, req, resp);
 		if(user == null)
 		{
 			model.addAttribute("loginStatus","Invalid credentials");
-			return "login"; //return to the login page
+			return "/login"; //return to the login page
 		}
         
-		if(authService.identifyUserRole(resp,req)==UserType.host)
-			return "hostPage";
+		//Redirecting to authorized page
+		if(user.getUserRole()==UserType.host)
+			return "redirect:/host/home";
+		if(user.getUserRole()==UserType.admin)
+			return "redirect:/admin/home";
+		else
+			return "redirect:/guest/home";
 
-		return "userHomepage";
 	}
 	
 	//Logout User from bowser
@@ -121,5 +142,12 @@ public class HomePageController {
 	{
 		return (authService.logoutProfile(req, resp) == true) ? "login.html" : "homepage.html";
 
+	}
+	
+	//show page not found 
+	@GetMapping("/pageNotFound")
+	public String showPageNotFound()
+	{
+		return "/pageNotFound";
 	}
 }

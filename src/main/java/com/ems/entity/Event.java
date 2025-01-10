@@ -5,6 +5,8 @@ import java.time.LocalDateTime;
 import com.ems.repository.VenueRepository;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -13,11 +15,9 @@ import jakarta.persistence.Table;
  
 @ Entity
 @Table(name="event_tbl")
-public class Event{
-	private static int autoId=1;
-	
+public class Event{	
 	@Id
-//	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
 	@ManyToOne
@@ -43,7 +43,10 @@ public class Event{
     
     private int ticketPrice;
     
-    private String status;
+    @Enumerated(value = EnumType.STRING)
+    private EventStatusType status;
+    
+    private String imageId;
     
     private String description;    
     
@@ -76,11 +79,13 @@ public class Event{
 		this.host = host;
 		this.description = description;
 		this.status = getStatus();
-		this.id = autoId;
-		autoId++;
 
 	}
 
+	public void setId(int id)
+	{
+		this.id = id;
+	}
 
 	public int getId() {
 		return id;
@@ -167,35 +172,39 @@ public class Event{
     	this.category = category;
     }
     //Get Event Current Status 
-    public String getStatus()
+    public EventStatusType getStatus()
     {
        LocalDateTime currDateTime = LocalDateTime.now();
        if(currDateTime.isAfter(reg_start_dateTime) && currDateTime.isBefore(reg_end_dateTime))
-    		   return "Registration Active";
+    		   return EventStatusType.registration_active;
        else
        {
     	   if(currDateTime.isAfter(reg_end_dateTime) && currDateTime.isBefore(event_start_dateTime))
-    		   return "Registration Closed";
+    		   return EventStatusType.registration_closed;
     	   else
     	   {
     		   if (currDateTime.isAfter(event_start_dateTime) && currDateTime.isBefore(event_end_dateTime))
-    			   return "Event Active";
+    			   return EventStatusType.event_active;
     		   else 
     			   {
     			   if(currDateTime.isAfter(event_end_dateTime))
-    		           return "Event Closed";   
+    		           return EventStatusType.event_closed;   
     			   else
-    			       return "unknown";
+    			       return EventStatusType.unknown;
 
     			   }
     	   }
        }
     }
     
-    //get venue by id
-    public Venue getVenueById(int venueId,VenueRepository venueRepository)
-    {
-    	return venueRepository.findVenueById(venueId);
+    public String getImageId() {
+       return this.imageId;
     }
-	
+    
+    public void setImageId(String imageId)
+    {
+    	this.imageId = imageId;
+    }
+    
+
 }

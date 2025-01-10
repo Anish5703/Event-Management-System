@@ -50,5 +50,16 @@ public class UserService {
 	{
 		return userRepository.save(user); 
 	}
-
+	
+	//update existing user
+	public User updateUser(User user)
+	{
+		User dbUser = userRepository.findByUsername(user.getUsername());
+		user.setId(dbUser.getId());
+		user.setRole(dbUser.getRole());
+		user.setCreatedAt(dbUser.getCreatedAt());
+		return userRepository.save(user);
+	}
+	
+	
 }

@@ -4,6 +4,6 @@ public class UserNotFoundException extends RuntimeException{
 
 	public UserNotFoundException()
 	{
-		super("No User Login Found !! Login First!!!");
+		super("No User Login Found !! Login First!!");
 	}
 }

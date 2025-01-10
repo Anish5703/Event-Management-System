@@ -29,6 +29,7 @@ public class VenuePageController {
 		return "venue.html";
 	}
 	
+	/*
 	//adding venue
 	@PostMapping("/venue/add")
 	public String addVenue(@ModelAttribute Venue venue,Model model)
@@ -54,6 +55,8 @@ public class VenuePageController {
 		}
 		return "venue";
 	}
+	
+	*/
 	
 	//Search for venue name
 	@PostMapping("/venue/search")
@@ -94,7 +97,7 @@ public class VenuePageController {
 			venueByName.setName(newName);
 			venueByName.setAddress(address);
 			venueByName.setPhone(phone);
-			venueByName.setDiscription(description);
+			venueByName.setDescription(description);
 			//updating database with new data on old entity
 			venueRepository.save(venueByName);
 			model.addAttribute("updateStatus","Update Successful");

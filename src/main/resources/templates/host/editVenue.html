@@ -4,32 +4,33 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Edit Venue</title>
-    <link rel="stylesheet" href="./EditVenue.css" />
+    <link rel="stylesheet" th:href="@{/css/host/editVenue.css}" />
   </head>
   <body>
     <nav class="navbar">
       <div class="event">
-        <a href="./HostHomepage.html">Event Management</a>
+        <a th:href="@{host/homepage}">Event Management</a>
       </div>
       <div class="menu">
-        <a href="./AddVenue.html" class="add">Add Venue</a>
-        <a href="./venue.html">View Venue</a>
-        <a href="./HostProfile.html"
-          ><img src="./img/R.png" alt="" class="image1"
+			<a th:href="@{/host/allvenue}">All Venue</a>
+			<a th:href="@{/host/venue}">My Venue</a>
+            <a th:href="@{host/venue/add}" class="add">Add Venue</a>
+        <a th:href="@{/host/profile}"
+          ><img th:src="@{/img/R.png}" alt="" class="image1"
         /></a>
       </div>
     </nav>
     <div class="container">
       <div class="container-sub">
         <h2>Edit venue details</h2>
-        <form action="" method="POST">
+        <form th:action="@{/host/venue/update/{id}(id=${venue.id})}" method="POST" th:object="${venue}">
           <div class="form-group">
             <label for="name">Venue name:</label>
             <input
               type="text"
               id="name"
               name="name"
-              placeholder="Enter venue name"
+              th:field="*{name}"
               required
             />
           </div>
@@ -40,7 +41,7 @@
               type="text"
               id="address"
               name="address"
-              placeholder="Enter address"
+              th:field="*{address}"
               required
             />
           </div>
@@ -48,11 +49,11 @@
           <div class="form-group">
             <label for="number">Phone number:</label>
             <input
-              type="number"
+              type="text"
               id="text"
               name="number"
-              placeholder="Enter phone number"
-              required
+              th:field="*{phone}"
+              required 
             />
           </div>
 
@@ -62,7 +63,7 @@
               type="text"
               id="description"
               name="description"
-              placeholder="Describe about venue"
+              th:field="*{description}"
               required
             />
           </div>

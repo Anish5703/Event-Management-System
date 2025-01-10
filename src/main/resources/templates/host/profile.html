@@ -4,27 +4,27 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Host Profile</title>
-    <link rel="stylesheet" href="./HostProfile.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" th:href="@{/css/host/profile.css}" />
+    <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css}">
   </head>
   <body>
    <div class="nav">
-   <a th:href="@{host/home}"><i class="fa-solid fa-arrow-left-long"></i></a> 
+   <a th:href="@{/host/home}"><i class="fa-solid fa-arrow-left-long"></i></a> 
    </div>
     <div class="container">
       <div class="container-sub">
         <h2>Profile</h2>
         <div class="profile-header">
           <img th:src="@{/img/R.png}" alt="Admin Photo" class="profile-pic">
-          <h1>Host Name</h1>
+          <h1 th:text="${user.username}"></h1>
         </div>
         <div class="profile-details">
           <ul>
-            <li><strong>Email:</strong> host@example.com</li>
-            <li><strong>Phone:</strong> +977 980001000</li>
+            <li><strong>Email:</strong><p th:text="${user.email}"></p></li>
+            <li><strong>Phone:</strong><p th:text="${user.phone}"></p></li>
           </ul>
-          <button class="button1" type="button">Log out</button>
-          <button class="button2" type="button">Edit details</button>
+          <button class="button1" type="button" th:onclick="'location.href=\'' + @{/host/profile/logout} + '\''">Log out</button>
+          <button class="button2" type="button" th:onclick="'location.href=\'' + @{/host/profile/edit} + '\''">Edit details</button>
         </div>
        
     </div>
