@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.ems.exception.EventNotFoundException;
 import com.ems.exception.OnlyGuestIsAuthorizedException;
 import com.ems.exception.OnlyHostIsAuthorizedException;
 import com.ems.exception.UserNotFoundException;
@@ -50,4 +51,16 @@ public class GlobalExceptionHandler {
         return "redirect:/pageNotFound";
     	
     }
+    @ExceptionHandler(EventNotFoundException.class)
+    public String handleEventNotFoundException(EventNotFoundException ex,RedirectAttributes redirectAttributes)
+    {
+    	// Log the exception details
+        logger.error("Exception caught: {}", ex.getMessage(), ex);
+        
+        redirectAttributes.addFlashAttribute("errorMsg", "No Event Found with this id");
+        
+        return "redirect:/pageNotFound";
+    	
+    }
+    
 }

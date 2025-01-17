@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Booking Reciept</title>
+    <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css}" />
+    <style>
+      /* Inline CSS for appearance; better to move it into your CSS file */
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+      }
+
+      .nav {
+        height: 10vh;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        padding-left: 20px;
+        background-color: #333;
+        color: white;
+      }
+
+      .nav a {
+        text-decoration: none;
+        color: white;
+        font-size: 35px;
+      }
+
+      .nav a:hover {
+        color: #ffd500;
+      }
+
+      .container {
+        height: 90vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .container-sub {
+        width: 400px;
+        padding: 20px;
+        background: white;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        border-radius: 8px;
+        text-align: center;
+      }
+
+      .profile-header img {
+        width: 100%;
+        border-radius: 8px;
+      }
+
+      .profile-header h1 {
+        font-size: 24px;
+        margin: 15px 0;
+      }
+
+      .profile-details ul {
+        list-style: none;
+        padding: 0;
+        text-align: left;
+      }
+
+      .profile-details li {
+        margin: 10px 0;
+        font-size: 16px;
+      }
+
+      .ticket-selection {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        margin-top: 10px;
+      }
+
+      .ticket-selection button {
+        padding: 10px 15px;
+        font-size: 18px;
+        background-color: #ffd500;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      .ticket-selection button:hover {
+        background-color: #d00000;
+        color: white;
+      }
+
+      .ticket-selection input {
+        width: 50px;
+        text-align: center;
+        font-size: 18px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+
+      .total-amount {
+        font-size: 18px;
+        margin-top: 15px;
+        color: #333;
+        font-weight: bold;
+      }
+
+      button.primary-btn {
+        width: 100%;
+        padding: 10px;
+        margin-top: 20px;
+        background-color: #333;
+        color: white;
+        font-size: 16px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      button.primary-btn:hover {
+        background-color: #d00000;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="nav">
+      <a th:href="@{/guest/home}">
+        <i class="fa-solid fa-arrow-left-long"></i>
+      </a>
+    </div>
+
+    <div class="container">
+      <div class="container-sub">
+        <div class="profile-header" th:if="${booking != null}">
+          <img th:src="@{'/img/event/' + ${booking.event.imageId}}" alt="Event Image" />
+          <h1 th:text="${booking.event.name}"></h1>
+        </div>
+
+        <div class="profile-details">
+          <ul>
+            <li>
+              <strong>Ticket Price:</strong>
+               <span th:text="${booking.event.ticketPrice}"></span>
+            </li>
+            <li>
+              <strong>Number Of Tickets:</strong>
+              <span th:text="${booking.ticketCount}"></span>
+            </li>
+               <li>
+              <strong>Total Amount:</strong>
+              <span th:text="${booking.totalAmount}"></span>
+            </li>
+                <li>
+              <strong>Ticket Id:</strong>
+              <span th:text="${booking.ticketId}"></span>
+            </li>
+
+        </div>
+
+        <button class="primary-btn" type="button" th:onclick="'location.href=\'' + @{/guest/bookings} + '\''">Go to my bookings</button>
+      </div>
+    </div>
+
+   
+  </body>
+</html>

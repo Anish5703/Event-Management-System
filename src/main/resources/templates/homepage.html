@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=\, initial-scale=1.0" />
-    <title>Host Homepage</title>
-    <link rel="stylesheet" th:href="@{/css/guest/homepage.css}"/>
+    <title>Homepage</title>
+    <link rel="stylesheet" th:href="@{/css/homepage.css}"/>
       <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css}">
  
     <script th:src="@{https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js}" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
@@ -14,28 +14,26 @@
     <nav class="navbar">
       <div class="event">
         <a th:href="@{/home}">
-			<i class="fa-solid fa-calendar-check fa-flip"></i> <span class="headings1">Event Management</span>
+			<i class="fa-solid fa-calendar-check fa-flip"></i> <span class="headings1">E v e n t i f y</span>
 			</a>
       </div>
       <div class="menu">
         <a th:href="@{/event}">Event</a>
         <a th:href="@{/login}">Login</a>
         <a th:href="@{/signup}">Signup</a>
-        <a th:href="@{/profile}">
-     <i class="fa-solid fa-user"></i>  </a>
-      </div>
+
     </nav>
     <!-- Boot Strap -->
 		<div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img th:src="@{/img/hero-carasuel/banner1.png}" class="d-block h-20 w-100" id="carosuel"alt="...">
+      <img th:src="@{/img/hero-carasuel/carosuel2.jpg}" class="d-block h-20 w-100" id="carosuel"alt="...">
     </div>
     <div class="carousel-item">
-      <img th:src="@{/img/hero-carasuel/banner1.png}" class="d-block w-100" id="carosuel" alt="...">
+      <img th:src="@{/img/hero-carasuel/carosuel3.jpg}" class="d-block w-100" id="carosuel" alt="...">
     </div>
     <div class="carousel-item">
-      <img th:src="@{/img/hero-carasuel/carosuel1.jpg}" class="d-block w-100" id="carosuel" alt="...">
+      <img th:src="@{/img/hero-carasuel/carosuel4.jpg}" class="d-block w-100" id="carosuel" alt="...">
     </div>
   </div>
   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
@@ -61,7 +59,7 @@
         <button>Explore</button>
       </div>     -->            
 
-     <div class="headings2"><center><h1>Trending Events</h1></center></div>  
+     <div class="headings2"><center><h1>Explore Events</h1></center></div>  
       <div class="event-cards">
         <div class="card" th:if="${eventList != null}" th:each="event : ${eventList}">
           <img th:src="@{'/img/event/'+${event.imageId}}" alt=" Event Image" />

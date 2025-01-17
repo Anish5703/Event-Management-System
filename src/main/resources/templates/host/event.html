@@ -5,15 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Event/View Event</title>
     <link rel="stylesheet" th:href="@{/css/host/event.css}">
+          <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css}">
+
 </head>
 <body>
     <nav class="navbar">
       <div class="event"><a th:href="@{/host/home}">Event Management</a></div>
         <div class="menu">
           <a th:href="@{/host/event/add}">Add Event</a>
-          <a th:href="@{/host/profile}"
-            ><img th:src="@{/img/R.png}" alt="" class="image1"
-          /></a>
+         <a th:href="@{/host/profile}">
+     <i class="fa-solid fa-user"></i>  </a>
+      </div>
         </div>
       </nav>
       <div class="table-container">
@@ -21,28 +23,22 @@
           <thead>
             <tr>
 			  <th>S.N</th>
-              <th>Id</th>
               <th>Event Name</th>
               <th>Venue</th>
-              <th>Category</th>
               <th>Status</th>
               <th>Guest Capacity</th>
               <th>Ticket Price</th>
-              <th>Description</th>
               <th>Action</th>
             </tr>
           </thead>
           <tbody>
 			<tr th:if="${eventList != null}" th:each="event,iteration : ${eventList}">
 			 <td th:text="${iteration.count}"></td>
-            <td th:text="${event.id}"></td>
             <td th:text="${event.name}"></td>
             <td th:text="${event.venue.name}"></td>
-            <td th:text="${event.category.name}"></td>
             <td th:text="${event.status}"></td>
             <td th:text="${event.guestCapacity}"></td>
             <td th:text="${event.ticketPrice}"></td>
-            <td  class="describe" th:text="${event.description}"></td>
 				<td><button type="button" th:onclick="'location.href=\'' + @{/host/event/edit/{id}(id=${event.id})} + '\''">Edit</button>
                 <button type="button" th:onclick="'location.href=\'' + @{/host/event/delete/{id}(id=${event.id})} + '\''">Delete</button></td>
           </tbody>

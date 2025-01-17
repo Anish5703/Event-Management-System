@@ -57,30 +57,6 @@ public class Event{
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
-
-	public Event()
-    {
-    	
-    }
-    
-//parameterized constructor
-	public Event(String name,User host,Venue venue,LocalDateTime reg_open_dateTime, LocalDateTime reg_end_dateTime,
-			LocalDateTime event_open_dateTime, LocalDateTime event_end_dateTime,int guestCapacity,
-			int ticketPrice,String description) {
-		this.name = name;
-		this.reg_start_dateTime = reg_open_dateTime;
-		this.reg_end_dateTime = reg_end_dateTime;
-		this.event_start_dateTime = event_open_dateTime;
-		this.event_end_dateTime = event_end_dateTime;
-		this.guestCapacity = guestCapacity;
-		this.ticketPrice = ticketPrice;
-		this.venue = venue;
-		this.host = host;
-		this.description = description;
-		this.status = getStatus();
-
-	}
 
 	public void setId(int id)
 	{

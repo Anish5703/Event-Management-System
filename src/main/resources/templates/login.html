@@ -4,11 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Client Side Validation</title>
-  <link rel="stylesheet" th:href="@{/css/signup.css}">
+  <link rel="stylesheet" th:href="@{/css/login.css}">
   <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css}">
   <script th:src="@{/javascript/error-handling.js}"></script>
 </head>
 <body >
+	   <a th:href="@{/home}"><i class="fa-solid fa-arrow-left-long"></i></a> 
+
   <form th:action="@{/login/user}" method="post" class="registrationForm" id="myform" >
       <div class="form-group">
       <label for="fullName">Username / Email</label>

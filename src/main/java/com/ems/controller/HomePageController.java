@@ -61,9 +61,9 @@ public class HomePageController {
 		if(userService.isEmailExists(user.getEmail()) ==true || userService.isUsernameExists(user.getUsername()) == true)
 		{
 			if(userService.isEmailExists(user.getEmail()) == true)
-			model.addAttribute("emailStatus","Email already exists");
+			model.addAttribute("emailErr","Email already exists");
 			if(userService.isUsernameExists(user.getUsername()) == true)
-			model.addAttribute("usernameStatus","Username already exists");
+			model.addAttribute("usernameErr","Username already exists");
 			return "signup.html";  //return to the registration page
 		}
 		else
@@ -105,7 +105,7 @@ public class HomePageController {
     		 return "redirect:/guest/home";
      }
      else
-        return "/login";      //return to the log in page
+        return "login.html";      //return to the log in page
 	}
 	
 

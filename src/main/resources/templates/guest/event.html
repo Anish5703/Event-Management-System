@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=\, initial-scale=1.0" />
+    <title>Host Homepage</title>
+    <link rel="stylesheet" th:href="@{/css/guest/event.css}"/>
+      <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css}">
+ 
+    <script th:src="@{https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js}" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <link th:href="@{https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css}" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="event">
+        <a th:href="@{/home}">
+			<i class="fa-solid fa-calendar-check fa-flip"></i> <span class="headings1">Event Management</span>
+			</a>
+      </div>
+      <div class="menu">
+        <a th:href="@{/guest/event}">Event</a>
+        <a th:href="@{/guest/bookings}">My Bookings</a>
+        <a th:href="@{/guest/profile}">
+     <i class="fa-solid fa-user"></i>  </a>
+      </div>
+    </nav>
+    <div class="container2">
+      <div class="search-bar">
+        <input type="text" placeholder="Search Event here..." />
+        <button>Search</button>
+      <select id="category" name="category" required />
+      <option value="" disabled selected>Select a Category</option> 
+        <option th:each="cat : ${categoryList}" 
+                th:value="${cat.id}" 
+                th:text="${cat.name}">
+        </option>
+    </select>
+        <button>Explore</button>
+      </div>             
+      <div class="event-cards">
+        <div class="card" th:if="${eventList != null}" th:each="event : ${eventList}">
+          <img th:src="@{'/img/event/'+${event.imageId}}" alt=" Event Image" />
+          <div class="card-content">
+            <h2 th:text="${event.name}"></h2>
+            <p th:text="${event.description}"></p>
+            <p><strong>Category:</strong><span th:text="${event.category.name}"></span></p>
+            <p><strong>Guest Capacity:</strong><span th:text="${event.guestCapacity}"></span></p>
+            <p><strong>Tickets Price:</strong><span th:text="${event.ticketPrice}"></span></p>
+            <p><strong>Venue:</strong><span th:text="${event.venue.name}" +" , "+"${event.venue.address"</span>
+          <p><strong>Status:</strong>
+            <span th:text="${event.status}"></span>
+            </p> 
+            <br />
+            <center><button class="join-btn" th:onclick="'location.href=\'' + @{/guest/join/{id}(id=${event.id})} + '\''">Join Event</button></center>
+            
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="footer">
+      <div class="sub-footer">
+        <div class="footer-part1">
+          <div class="footer-heading">
+            <span>Event Management</span>
+          </div>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. A
+            exercitationem, architecto sint consequatur officia molestiae vero
+            repudiandae dignissimos
+          </p>
+        </div>
+
+        <div class="footer-part1">
+          <div class="footer-heading">
+            <span>Contact Us</span>
+          </div>
+          <div class="footer-contact">
+            <li>
+              <i class="fa fa-envelope" aria-hidden="true"></i> abc11@gmail.com
+            </li>
+            <li><i class="fa fa-phone" aria-hidden="true"></i> 9700000000</li>
+            <li>
+              <i class="fa fa-map-marker" aria-hidden="true"></i> Butwal,Nepal
+            </li>
+            <li><i class="fa fa-mobile" aria-hidden="true"></i> 071 000000</li>
+          </div>
+        </div>
+        <div class="footer-part1">
+          <div class="footer-heading">
+            <span>Sign Up</span>
+          </div>
+          <div class="sign">
+            <input
+              type="email"
+              name="email"
+              id="sign"
+              placeholder="Enter Your Email"
+            />
+            <button type="submit">Submit</button>
+          </div>
+          <div th:if="${errorMsg != null}" class="error-msg">
+		  <h6 th:text="${errorMsg}"></h6>
+		  </div>
+<div class="icon">
+    <ul>
+        <li><i class="fab fa-facebook-f"></i></li>
+        <li><i class="fab fa-twitter"></i></li>
+        <li><i class="far fa-comment"></i></li>
+        <li><i class="fab fa-instagram"></i></li>
+    </ul>
+</div>
+        </div>
+      </div>
+    </div>
+    <div class="copy-right">
+      <h1>© Copyright 2024 Made By Anish Paudel</h1>
+    </div>
+  </body>
+</html>

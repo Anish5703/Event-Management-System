@@ -8,7 +8,7 @@ html {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: sans-serif;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
 html, body {
@@ -21,6 +21,19 @@ body {
     flex-direction: column;
     min-height: 100vh;
 }
+#headings2{
+	font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+	font-weight: 600;
+	font-size:larger;
+	text-decoration: underline;
+	color: rgb(128, 128, 128);
+}
+
+i{
+	margin-right:20px;
+	font-size: 30px;
+}
+
 
 /* Navbar Styles */
 /*
@@ -41,17 +54,16 @@ body {
     width: 100%;
     height: 10vh;
     display: flex;
-    justify-content: space-between;
+    justify-content:space-evenly;
     align-items: center;
     border-bottom: 1px solid rgba(0, 0, 0, 0.31);
     padding: 0.5rem 1rem;
-    background-color: thistle;
-    z-index: 1000; /* Ensures the navbar is above other content */
-    
+    background-color: white;
+    z-index: 100; /* Ensures the navbar is above other content */
 }
 
 .navbar a {
-    font-size: 16px;
+    font-size: 24px;
     font-weight: bold;
     color: black;
     text-decoration: none;
@@ -75,7 +87,7 @@ body {
     width: 40%;
     height: 10vh;
     display: flex;
-    justify-content: center;
+    justify-content:space-evenly;
     align-items: center;
 
 }
@@ -88,13 +100,22 @@ body {
 .menu a:hover {
     color: #d00000;
 }
-
 .image1 {
     height: 9vh;
     width: 50px;
 }
+
+.container{
+    background-color: #ffd500;
+    background-image: url('/img/hero-carasuel/banner1.png'); /* Ensure correct path */
+    background-size: cover; /* Cover the entire container */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Avoid repeating the image */
+    height: 40vh; /* Set a fixed height */
+}
+
 .container2{
-    padding-top: 15vh; /* Adjust to create enough space below the navbar */
+    padding-top: 1vh; /* Adjust to create enough space below the navbar */
     background-color:beige;
 }
 
@@ -195,8 +216,10 @@ body {
 }
 
 .footer-part1 {
-    flex: 1 1 300px;
+   
+   flex: 1 1 300px;
     margin-top: 5vh;
+
 }
 
 .footer-heading {
@@ -235,6 +258,7 @@ body {
     margin-right: 10px; /* Adds spacing between icon and text */
 }
 
+
 #sign {
     background: #fff;
     padding: 12px 15px;
@@ -244,6 +268,7 @@ body {
     border: none;
     letter-spacing: 1px;
     margin-top: 20px;
+    margin-left: 10px;
 }
 
 .sign button {
@@ -291,3 +316,21 @@ body {
     font-size: 12px;
     letter-spacing: 1px;
 }
+
+#carosuel{
+	height: 90vh;
+}
+.join-btn {
+    padding: 10px 20px;
+    background-color: #d00000;
+    color: white;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+}
+
+.join-btn:hover {
+    background-color: #ffd500;
+}
+
+

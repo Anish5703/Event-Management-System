@@ -1,0 +1,106 @@
+<!--  Resgistration Form
+  -Name is required , atleast 8 characters
+  -passsword and confirm password
+  -phone must be 10 digits
+  -email ,must be on email format 
+  -country is required
+  -gender must be selected
+  -should accept terms and condition before submit
+  -disable submit button until, all these conditions are satisfied
+ -->
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Side Validation</title>
+    <link rel="stylesheet" th:href="@{/css/signup.css}">
+    <script defer th:src="@{/javascript/signup.js}"></script>
+
+  </head>
+  <body>
+    <form  th:action="@{/signup/user}" method="POST" class="registrationForm" id="myform"  onsubmit="return handleSubmit()" th:object="${user}">
+  <!--
+        <div class="form-group">	
+		<label for="fullname">Full Name</label>
+		<div class="inner-group">
+		<input type="text" name="fullname" id="fullname" placeholder="Enter Your Name" th:field="*{name}" required />
+		<p class="error" id="fullNameErr"></p>
+		</div>
+		</div>
+
+	-->	
+		<div class="form-group">
+        <label for="username">Username</label>
+         <div class="inner-group">
+        <input type="text" name="username" id="username" placeholder="Enter a username" th:field="*{username}" Required/>
+        <p th:text="${usernameErr}"></p>
+        </div>
+    </div>
+        <div class="form-group">
+        <label for="password">Password</label>
+        <div class="inner-group">
+        <input type="password" name="password" id="password" placeholder="Enter New Password" th:field="*{password}" Required />
+        <p class="error" id="passwordErr"></p>
+        </div>
+        </div>
+        <div class="form-group">
+            <label for="confirmPassword">Confirm Password</label>
+            <div class="inner-group">
+            <input type="password" name="confirmPassword" id="confirmPassword" placeholder="Confirm Your Password" Required />
+            <p class="error" id="confirmPasswordErr"></p>
+            
+        </div>
+        </div>
+        <div class="form-group">
+            <label for="phone">Phone</label>
+            <div class="inner-group">
+            <input type="text" name="phone" id="phone" 
+             placeholder="e.g +977 98XXXXXXXX" th:field="*{phone}" Required /> 
+            <p class="error" id="phoneErr" th:text="${phoneErr}"></p>
+
+        </div>
+    </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <div class="inner-group">
+            <input type="email" name="email" id="email" placeholder="Enter Your Email" Required />
+            <p class="error" id="emailErr"></p>
+            <p th:text="${emailExists}"></p>
+           
+        </div>
+        </div>
+     <!--   <div class="form-group">
+            <label for="userGroup">Group Name</label>
+            <select name="userGroup" id="userGroup">
+                <option value="bca">BCA Union</option>`    
+                <option value="csit">BSC CSIT Union</option>
+                <option value="bit">BIT Union</option>                       
+            </select> -->
+        </div>
+        <div class="form-group">
+			<label for="UserRole">Select Role</label>
+			<select name="userRole" id="userRole">
+			<option value="host">Host/Organizer</option>
+			<option value="guest">Guest/Attendee</option>
+			</select>
+		</div>
+        <div class="form-group">
+            <label for="genderGroup">Gender</label>
+            <input type="radio" value="Male" name="genderGroup" id="genderGroup" th:field="*{gender}"/>Male
+            <input type="radio" value="female" name="genderGroup" id="genderGroup" th:field="*{gender}"/>Female
+        </div>
+        <div class="form-group">
+            <input type="checkbox" name="term" id="term" />I accept all
+            <a href="#">terms and conditions</a>
+        </div>
+        <div class="button-group" >
+            <button type="submit" id="submit" >Submit</button>
+            <button type="reset" id="reset">Reset</button>
+        </div>
+          <div class="form-group">
+		  <h6>Already Have an Account ? <a th:href="@{/login}">Login</a></h6>
+	  </div>
+    </form>
+  </body>
+  </html>

@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Edit Venue</title>
     <link rel="stylesheet" th:href="@{/css/host/EditEvent.css}" />
+          <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css}">
+
   </head>
   <body>
     <nav class="navbar">
@@ -14,9 +16,9 @@
       <div class="menu">
         <a th:href="@{/host/event/add}" class="add">Add Event</a>
         <a th:href="@{/host/event}">View Event</a>
-        <a th:href="@{/host/profile}"
-          ><img th:src="@{/img/R.png}" alt="" class="image1"
-        /></a>
+        <a th:href="@{/host/profile}">
+     <i class="fa-solid fa-user"></i>  </a>
+      </div>
       </div>
     </nav>
     <div class="form-container">

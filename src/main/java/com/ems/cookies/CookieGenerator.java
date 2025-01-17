@@ -30,8 +30,8 @@ public class CookieGenerator {
 			sb.append(sample.charAt(index));
 		}
 		 result = sb.toString();
-		 System.out.println("Result generated");
-		 System.out.println("Result "+result);
+		 System.out.println("Cookie generated");
+		 System.out.println("Cookie Id "+result);
 		
 		}
 		ids.add(result);

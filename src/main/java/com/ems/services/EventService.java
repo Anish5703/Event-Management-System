@@ -54,7 +54,7 @@ public class EventService {
 	{
 		Event event = eventRepository.findEventById(eventId);
 		if(event == null)
-			throw new EventNotFoundException("Event Not Found in Database");
+			throw new EventNotFoundException();
 		return event;
 	}
 	

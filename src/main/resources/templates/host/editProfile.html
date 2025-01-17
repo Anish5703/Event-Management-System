@@ -14,7 +14,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Profile</title>
-    <link rel="stylesheet" th:href="/css/signup.css">
+    <link rel="stylesheet" th:href="@{/css/signup.css}">
+          <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css}">
+
   </head>
   <body>
     <form  th:action="@{/host/profile/update}" method="POST" class="registrationForm" id="myform"  onsubmit="return handleSubmit()" th:object="${user}">
@@ -45,7 +47,7 @@
             <label for="phone">Phone</label>
             <div class="inner-group">
             <input type="text" name="phone" id="phone" 
-             placeholder="Enter Your Phone Number" th:field="*{phone}">
+             placeholder="e.g +977 98XXXXXXXX" th:field="*{phone}">
             <p class="error" id="phoneErr"></p>
 
         </div>

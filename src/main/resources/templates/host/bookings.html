@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" th:href="@{/css/host/bookings.css}">
+          <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css}">
+
 </head>
 <body>
     <nav class="navbar">
@@ -15,9 +17,9 @@
           <a th:href="@{/host/event}">Event</a>
           <a th:href="@{/host/venue}">Venue</a>
           <div class="book"><a th:href="@{/host/bookings}">All Bookings</a></div>
-          <a th:href="@{/host/profile}"
-            ><img th:src="@{/img/R.png}" alt="" class="image1"
-          /></a>
+        <a th:href="@{/host/profile}">
+     <i class="fa-solid fa-user"></i>  </a>
+      </div>
         </div>
       </nav>
     <div class="table-container">

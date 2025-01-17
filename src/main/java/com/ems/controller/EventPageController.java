@@ -34,23 +34,9 @@ public class EventPageController {
 	public String showEventPage(Model model) {
 		model.addAttribute("categoryList",categoryService.getCategoryList());		
 		model.addAttribute("eventList",eventService.getAllEventList());
-		return "event";  //event dashboard page
+		return "event.html";  //event dashboard page
 	}
 
-	/*
-// add event
-	@PostMapping("/event/add")
-	public String addEvent(@ModelAttribute Event event, Model model,@CookieValue(name="id") String cookieId){
-         
-		Event newEvent = eventService.addEvent(event,cookieId);
-      // verifying if data saved in database
-		if(newEvent != null)
-			model.addAttribute("addStatus","Event Created Successfully");
-		else
-			model.addAttribute("addStatus","Event Creation Failed");
-		return "event.html"; //
-	}
-	*/
 
 //event update
 	@GetMapping("event/edit")
