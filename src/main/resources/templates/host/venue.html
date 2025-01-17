@@ -36,7 +36,6 @@
         <tbody>
           <tr th:if="${venueList != null}" th:each="venue,iteration : ${venueList}">
 			 <td th:text="${iteration.count}"></td>
-            <td th:text="${venue.id}"></td>
             <td th:text="${venue.name}"></td>
             <td th:text="${venue.address}"></td>
             <td th:text="${venue.phone}"></td>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" th:href="@{/css/host/bookings.css}">
+          <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css}">
+
+</head>
+<body>
+    <nav class="navbar">
+      <div class="event">
+        <a th:href="@{/home}">
+			<i class="fa-solid fa-calendar-check fa-flip"></i> <span class="headings1">E v e n t i f y</span>
+			</a>
+      </div>
+      <div class="menu">
+        <a th:href="@{/guest/event}">Event</a>
+        <a th:href="@{/guest/bookings}">My Bookings</a>
+        <a th:href="@{/guest/profile}">
+     <i class="fa-solid fa-user"></i>  </a>
+      </div>
+    </nav>
+    <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>S.N</th>
+              <th>Event</th>
+              <th>Venue</th>
+              <th>Starts At</th>
+              <th>Number of Tickets</th>
+              <th>Total Amount</th>
+              <th>Ticket id</th>
+            </tr>
+          </thead>
+          <tbody th:if="${bookingList != null}">
+            <tr th:if="${bookingList != null}" th:each="booking,iteration : ${bookingList}">
+              <td th:text="${iteration.count}">1</td>
+              <td th:text="${booking.event.name}">Conference</td>
+              <td th:text="${booking.event.venue.name}" +', '+"${booking.event.venue.address}">Hotel Tulip</td>
+              <td th:text="${booking.event.event_start_dateTime}">2025/1/1</td>
+              <td th:text="${booking.ticketCount}">3</td>
+              <td th:text="${booking.totalAmount}">100</td>
+              <td th:text="${booking.ticketId}">0010</td>       
+            </tr>
+          </tbody>
+          <span th:if="${bookingList == null}">
+			  <center>
+				  <p>No Event Booked</p>
+			  </center>
+		  </span>
+        </table>
+      </div>
+</body>
+</html>

@@ -1,5 +1,7 @@
 package com.ems.services;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,6 +49,40 @@ public class BookingService {
 			return null;
 		}
 	}
+	
+	//get guest booking list
+	public List<Booking> getGuestBookingList(User user) throws Exception
+	{
+		if(user == null)
+			throw new UserNotFoundException();
+		
+	  List<Booking> bookingList = bookingRepo.findAll();
+	  List<Booking> guestBookingList = new ArrayList();
+	  for(Booking booking : bookingList)
+	  {
+		  if(booking.getUser() == user)
+			  guestBookingList.add(booking);
+			  
+	  }
+	  return guestBookingList;
+	}
+	//get guest booking list
+	public List<Booking> getHostBookingList(User user) throws Exception
+	{
+		if(user == null)
+			throw new UserNotFoundException();
+		
+	  List<Booking> bookingList = bookingRepo.findAll();
+	  List<Booking> hostBookingList = new ArrayList();
+	  for(Booking booking : bookingList)
+	  {
+		  if(booking.getEvent().getHost() == user)
+			  hostBookingList.add(booking);
+			  
+	  }
+	  return hostBookingList;
+	}
+	
 	
 
 }

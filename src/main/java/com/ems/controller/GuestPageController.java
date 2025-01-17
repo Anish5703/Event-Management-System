@@ -1,5 +1,7 @@
 package com.ems.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -94,7 +96,20 @@ model.addAttribute("eventList",eventService.getAllEventList());
 		System.out.println(booking);
 		return "/guest/reciept.html";
 	}
-	
+	//show guest event booking list page
+	@GetMapping("/guest/bookings")
+	public String showGuestBookingListPage(HttpServletRequest req,
+			HttpServletResponse resp,Model model) throws Exception
+	{
+		//Layer 1 Validation if the user is host otherwise it throws exception   
+				authService.guestAuthorization(req, resp);
+				
+				User user = authService.getUserByCookie(req, resp);
+	       
+	       model.addAttribute("bookingList",bookingService.getGuestBookingList(user));
+	       return "/guest/bookings.html";
+		
+	}
 	
 	//user profile page
 	@GetMapping("/guest/profile")
